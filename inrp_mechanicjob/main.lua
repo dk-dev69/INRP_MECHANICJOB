@@ -363,7 +363,7 @@ function OpenMechanicActionsMenu()
 									TaskWarpPedIntoVehicle(playerPed,  vehicle, -1)
 								end)
 							else
-								ESX.Showmythic_notify(_U('service_full') .. inServiceCount .. '/' .. maxInService)
+								ESX.ShowNotification(_U('service_full') .. inServiceCount .. '/' .. maxInService)
 							end
 						end, 'mechanic')
 					end
@@ -426,7 +426,7 @@ function OpenMechanicHarvestMenu()
 			if not holdingPackage then
 				TriggerServerEvent('esx_mechanicjob:startHarvest',data.current.value)
 			else
-				exports['mythic_notify']:SendAlert('error', "Já tens algo na mão") -- mythic_notify system
+				exports['mythic_notify']:'seed_weed'('error', "Já tens algo na mão") -- mythic_notify system
 			end
 		end, function(data, menu)
 			menu.close()
@@ -441,9 +441,9 @@ end
 function OpenMechanicCraftMenu()
 	if Config.EnablePlayerManagement and PlayerData.job.name == 'mechanic' then
 		local elements = {
-			{label = _U('blowtorch'),  value = 'blow_pipe'},
-			{label = _U('repair_kit'), value = 'fix_kit'},
-			{label = _U('body_kit'),   value = 'caro_kit'}
+			{label = _U('blowtorch'),  value = 'blowpipe'},
+			{label = _U('repair_kit'), value = 'fixkit'},
+			{label = _U('body_kit'),   value = 'carokit'}
 		}
 
 		ESX.UI.Menu.CloseAll()
@@ -469,7 +469,7 @@ function OpenMechanicCraftMenu()
 			CurrentActionData = {}
 		end)
 	else
-		ESX.Showmythic_notify(_U('not_experienced_enough'))
+		ESX.ShowNotification(_U('not_experienced_enough'))
 	end
 end
 
@@ -565,7 +565,7 @@ function RegisterCommands()
 							if vehicle ~= targetVehicle then
 								AttachEntityToEntity(targetVehicle, vehicle, 20, -0.5, -5.0, 1.0, 0.0, 0.0, 0.0, false, false, false, false, 20, true)
 								CurrentlyTowedVehicle = targetVehicle
-								ESX.Showmythic_notify(_U('vehicle_success_attached'))
+								ESX.ShowNotification(_U('vehicle_success_attached'))
 							else
 								exports['mythic_notify']:SendAlert('error', 'Não podes rebocar o teu veículo!')
 							end
@@ -694,7 +694,7 @@ function OpenGetStocksMenu()
 				local count = tonumber(data2.value)
 
 				if count == nil then
-					ESX.Showmythic_notify(_U('invalid_quantity'))
+					ESX.ShowNotification(_U('invalid_quantity'))
 				else
 					menu2.close()
 					menu.close()
@@ -741,7 +741,7 @@ function OpenPutStocksMenu()
 				local count = tonumber(data2.value)
 
 				if count == nil then
-					ESX.Showmythic_notify(_U('invalid_quantity'))
+					ESX.ShowNotification(_U('invalid_quantity'))
 				else
 					menu2.close()
 					menu.close()
@@ -790,9 +790,9 @@ AddEventHandler('esx_mechanicjob:onHijack', function()
 					SetVehicleDoorsLocked(vehicle, 1)
 					SetVehicleDoorsLockedForAllPlayers(vehicle, false)
 					ClearPedTasksImmediately(playerPed)
-					ESX.Showmythic_notify(_U('veh_unlocked'))
+					ESX.ShowNotification(_U('veh_unlocked'))
 				else
-					ESX.Showmythic_notify(_U('hijack_failed'))
+					ESX.ShowNotification(_U('hijack_failed'))
 					ClearPedTasksImmediately(playerPed)
 				end
 			end)
@@ -821,7 +821,7 @@ AddEventHandler('esx_mechanicjob:onCarokit', function()
 				SetVehicleFixed(vehicle)
 				SetVehicleDeformationFixed(vehicle)
 				ClearPedTasksImmediately(playerPed)
-				ESX.Showmythic_notify(_U('body_repaired'))
+				ESX.ShowNotification(_U('body_repaired'))
 			end)
 		end
 	end
@@ -849,7 +849,7 @@ AddEventHandler('esx_mechanicjob:onFixkit', function()
 				SetVehicleDeformationFixed(vehicle)
 				SetVehicleUndriveable(vehicle, false)
 				ClearPedTasksImmediately(playerPed)
-				ESX.Showmythic_notify(_U('veh_repaired'))
+				ESX.ShowNotification(_U('veh_repaired'))
 			end)
 		end
 	end
@@ -1261,7 +1261,7 @@ function OpenLSMenu(elems, menuName, menuTitle, parent)
 		for k,v in pairs(Config.Menus) do
 			if k == data.current.modType or isRimMod then
 				if data.current.label == _U('by_default') or string.match(data.current.label, _U('installed')) then
-					ESX.Showmythic_notify(_U('already_own', data.current.label))
+					ESX.ShowNotification(_U('already_own', data.current.label))
 					TriggerEvent('esx_mechanicjob:installMod')
 				else
 					local vehiclePrice = 80000

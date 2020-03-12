@@ -27,8 +27,6 @@ Config.Employ = {
 	Coords = { x = -214.05, y = -1318.11, z = 30.89 }
 }
 
-Config.Vehicles = {}
-
 Config.Blip = {
 	Pos     = { x = -200.74, y = -1318.69, z = 31.09 },
 	Sprite  = 446,
@@ -205,7 +203,7 @@ subMenuConfigs = {
                     navAngle = 270,
                     minRadiusPercent = 0.6,
                     maxRadiusPercent = 0.9,
-                    labels = {"ARRANJAR 1", "ARRANJAR 2", "ARRANJAR 3"},
+                    labels = {"anim fix 1", "anim fix 2", "anim fix 3"},
                     commands = {"e fix1", "e fix2", "e fix3"}
                 }
             }
